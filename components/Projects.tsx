@@ -1,21 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react"; // Added 'useEffect' import
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import Image, { StaticImageData } from "next/image";
 import project1 from "../assets/proj5.png";
 import project2 from "../assets/proj6.png";
 import project3 from "../assets/proj7.png";
 import { useMotionTemplate, useMotionValue, motion, animate } from "framer-motion";
-// Define TypeScript type for projects
+
+// ✅ Proper type for image imports
 type Project = {
   id: string;
   year: number;
   title: string;
   description: string;
-  image: any; // Using 'any' for static imports; could be 'StaticImageData' from next/image
+  image: StaticImageData;
 };
 
-// Projects data
 const projects: Project[] = [
   {
     id: "1",
@@ -42,14 +42,14 @@ const projects: Project[] = [
     image: project3,
   },
 ];
+
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
+
 export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
-
   const sectionColor = useMotionValue(COLORS_TOP[0]);
 
   useEffect(() => {
-    // Animate section color
     const controls = animate(sectionColor, COLORS_TOP[1], {
       ease: "easeInOut",
       duration: 10,
@@ -57,7 +57,6 @@ export const Projects = () => {
       repeatType: "mirror",
     });
 
-    // Cleanup animation on component unmount
     return () => controls.stop();
   }, [sectionColor]);
 
@@ -65,19 +64,17 @@ export const Projects = () => {
 
   return (
     <motion.section
-        style={{
-          backgroundImage
-        }}
-
-     id="portfolio" className="py-32 text-white">
+      style={{ backgroundImage }}
+      id="portfolio"
+      className="py-32 text-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
-        
         {/* Left Side - Projects List */}
         <div>
           <h2 className="text-6xl font-bold mb-10">
             Selected <span className="text-gray-400">Projects</span>
           </h2>
-          
+
           {projects.map((project) => (
             <div
               key={project.id}
@@ -120,4 +117,5 @@ export const Projects = () => {
     </motion.section>
   );
 };
+
 export default Projects;
