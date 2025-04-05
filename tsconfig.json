@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",  // Add this line to define the base URL
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,7 +20,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
+      "@/pages/*": ["pages/*"],
+      "@/styles/*": ["styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
